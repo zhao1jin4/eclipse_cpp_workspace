@@ -1,0 +1,17 @@
+
+chapter3/LStrips.C 有中文
+chapter4/Perspect.C 有中文
+chapter5/Trangle.C 有中文
+chapter6/MyTest.cpp 有中文
+main.cpp 有中文
+
+
+
+chapter3/star.C 中用了windows.h
+LoadTGA.c 不能在Mac中编译
+chapter5_bitmap::main(argc,argv);//Mac crash
+
+---
+GLTools 使用Cygwin编译有问题,使用MinGW 编译OK
+
+文件夹名,namespace不能叫shader

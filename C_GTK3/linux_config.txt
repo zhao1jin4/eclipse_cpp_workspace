@@ -1,0 +1,213 @@
+使用Cygwin
+
+在GTK3中不推荐使用的头文件,( 规律是有 h,v 带方向的函数，)
+	gtkhbox.h 中有
+		gtk_hbox_new
+		gtk_hbutton_box_new 过时使用 gtk_button_box_new
+	gtkvbox.h 中有
+		gtk_vbox_new 过时使用  gtk_box_new
+		gtk_vbutton_box_new 过时使用 gtk_button_box_new
+	gtkhseparator.h 中有 
+		gtk_hseparator_new 过时使用 gtk_separator_new
+	
+
+buttion_radio.C
+	error: ‘GTK_CAN_DEFAULT’ was not declared 
+	error: ‘GTK_WIDGET_SET_FLAGS’ was not declared
+
+event_box.C:49:39: error: ‘gtk2_event_box::GtkWidget’ has no member named ‘window’
+../src/progress_bar.C:183:35: error: ‘GTK_CAN_DEFAULT’ was not declared in this scope
+../src/progress_bar.C:183:50: error: ‘GTK_WIDGET_SET_FLAGS’ was not declared in this scope
+
+------------目前无解决的错误
+	progress_bar.C
+	rule.C
+	scrolled_window.C
+	selection.C
+	selection_two.C
+	spin_button.C
+	toolbar.C
+------------删除的
+	complex_one.C
+	complex_two.C
+	calendar.C
+	color_selection.C
+	file_selection.C
+	entry_text.C
+	notebook.C
+
+-------------linux build log
+
+**** Build of configuration Debug for project C_GTK3 ****
+
+make all 
+Building file: ../src/arrow.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/arrow.d" -MT"src/arrow.d" -o "src/arrow.o" "../src/arrow.C"
+../src/arrow.C: In function ‘int gtk2_arrow::main(int, char**)’:
+../src/arrow.C:48:9: warning: ‘gtk2_arrow::GtkWidget* gtk2_arrow::gtk_hbox_new(gtk2_arrow::gboolean, gtk2_arrow::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/arrow.C:48:31: warning: ‘gtk2_arrow::GtkWidget* gtk2_arrow::gtk_hbox_new(gtk2_arrow::gboolean, gtk2_arrow::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/arrow.C
+ 
+Building file: ../src/aspect_frame.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/aspect_frame.d" -MT"src/aspect_frame.d" -o "src/aspect_frame.o" "../src/aspect_frame.C"
+Finished building: ../src/aspect_frame.C
+ 
+Building file: ../src/box.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/box.d" -MT"src/box.d" -o "src/box.o" "../src/box.C"
+../src/box.C: In function ‘gtk2_box::GtkWidget* gtk2_box::make_box(gtk2_box::gboolean, gtk2_box::gint, gtk2_box::gboolean, gtk2_box::gboolean, gtk2_box::guint)’:
+../src/box.C:30:9: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hbox_new(gtk2_box::gboolean, gtk2_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/box.C:30:43: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hbox_new(gtk2_box::gboolean, gtk2_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/box.C: In function ‘int gtk2_box::main(int, char**)’:
+../src/box.C:103:10: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_vbox_new(gtk2_box::gboolean, gtk2_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/box.C:103:32: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_vbox_new(gtk2_box::gboolean, gtk2_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/box.C:141:15: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/box.C
+../src/box.C:141:35: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+ 
+../src/box.C:165:15: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+Building file: ../src/button_box.C
+../src/box.C:165:35: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+Invoking: Cross G++ Compiler
+../src/box.C:192:15: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/button_box.d" -MT"src/button_box.d" -o "src/button_box.o" "../src/button_box.C"
+../src/box.C:192:35: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+../src/box.C:213:15: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+../src/box.C:213:35: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+../src/box.C:238:15: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+../src/box.C:238:35: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+../src/box.C:249:13: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hbox_new(gtk2_box::gboolean, gtk2_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/box.C:249:35: warning: ‘gtk2_box::GtkWidget* gtk2_box::gtk_hbox_new(gtk2_box::gboolean, gtk2_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_box.C: In function ‘gtk2_button_box::GtkWidget* gtk2_button_box::create_bbox(gtk2_button_box::gint, char*, gtk2_button_box::gint, gtk2_button_box::gint, gtk2_button_box::gint, gtk2_button_box::gint)’:
+../src/button_box.C:20:12: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_hbutton_box_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbbox.h:61): Use 'gtk_button_box_new' instead [-Wdeprecated-declarations]
+../src/button_box.C:20:33: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_hbutton_box_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbbox.h:61): Use 'gtk_button_box_new' instead [-Wdeprecated-declarations]
+../src/button_box.C:22:12: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_vbutton_box_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbbox.h:60): Use 'gtk_button_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/button_box.C
+../src/button_box.C:22:33: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_vbutton_box_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbbox.h:60): Use 'gtk_button_box_new' instead [-Wdeprecated-declarations]
+../src/button_box.C: In function ‘int gtk2_button_box::main(int, char**)’:
+ 
+../src/button_box.C:66:15: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_vbox_new(gtk2_button_box::gboolean, gtk2_button_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_box.C:66:37: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_vbox_new(gtk2_button_box::gboolean, gtk2_button_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Building file: ../src/button_icon.C
+../src/button_box.C:72:10: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_vbox_new(gtk2_button_box::gboolean, gtk2_button_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Invoking: Cross G++ Compiler
+../src/button_box.C:72:32: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_vbox_new(gtk2_button_box::gboolean, gtk2_button_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/button_icon.d" -MT"src/button_icon.d" -o "src/button_icon.o" "../src/button_icon.C"
+../src/button_box.C:77:79: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_box.C:81:75: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_box.C:85:84: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_box.C:89:73: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_box.C:95:10: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_hbox_new(gtk2_button_box::gboolean, gtk2_button_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_box.C:95:32: warning: ‘gtk2_button_box::GtkWidget* gtk2_button_box::gtk_hbox_new(gtk2_button_box::gboolean, gtk2_button_box::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_box.C:100:85: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_box.C:104:83: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_box.C:108:85: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_box.C:112:81: warning: deprecated conversion from string constant to ‘char*’ [-Wwrite-strings]
+../src/button_icon.C: In function ‘gtk2_button_icon::GtkWidget* gtk2_button_icon::xpm_label_box(gtk2_button_icon::gchar*, gtk2_button_icon::gchar*)’:
+../src/button_icon.C:16:11: warning: ‘gtk2_button_icon::GtkWidget* gtk2_button_icon::gtk_hbox_new(gtk2_button_icon::gboolean, gtk2_button_icon::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_icon.C:16:33: warning: ‘gtk2_button_icon::GtkWidget* gtk2_button_icon::gtk_hbox_new(gtk2_button_icon::gboolean, gtk2_button_icon::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_icon.C: In function ‘int gtk2_button_icon::main(int, char**)’:
+../src/button_icon.C:75:51: warning: deprecated conversion from string constant to ‘gtk2_button_icon::gchar* {aka char*}’ [-Wwrite-strings]
+../src/button_icon.C:75:51: warning: deprecated conversion from string constant to ‘gtk2_button_icon::gchar* {aka char*}’ [-Wwrite-strings]
+Finished building: ../src/button_icon.C
+ 
+Building file: ../src/button_radio.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/button_radio.d" -MT"src/button_radio.d" -o "src/button_radio.o" "../src/button_radio.C"
+../src/button_radio.C: In function ‘int gtk2_button_radio::main(int, char**)’:
+../src/button_radio.C:35:12: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_vbox_new(gtk2_button_radio::gboolean, gtk2_button_radio::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_radio.C:35:34: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_vbox_new(gtk2_button_radio::gboolean, gtk2_button_radio::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/button_radio.C:39:12: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_vbox_new(gtk2_button_radio::gboolean, gtk2_button_radio::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/button_radio.C
+ 
+../src/button_radio.C:39:35: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_vbox_new(gtk2_button_radio::gboolean, gtk2_button_radio::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Building file: ../src/container.C
+../src/button_radio.C:59:17: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+../src/button_radio.C:59:37: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_hseparator_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhseparator.h:60): Use 'gtk_separator_new' instead [-Wdeprecated-declarations]
+Invoking: Cross G++ Compiler
+../src/button_radio.C:63:12: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_vbox_new(gtk2_button_radio::gboolean, gtk2_button_radio::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/container.d" -MT"src/container.d" -o "src/container.o" "../src/container.C"
+../src/button_radio.C:63:35: warning: ‘gtk2_button_radio::GtkWidget* gtk2_button_radio::gtk_vbox_new(gtk2_button_radio::gboolean, gtk2_button_radio::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/container.C
+ 
+Building file: ../src/event_box.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/event_box.d" -MT"src/event_box.d" -o "src/event_box.o" "../src/event_box.C"
+Finished building: ../src/event_box.C
+ 
+Building file: ../src/fixed.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/fixed.d" -MT"src/fixed.d" -o "src/fixed.o" "../src/fixed.C"
+Finished building: ../src/fixed.C
+ 
+Building file: ../src/hello.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/hello.d" -MT"src/hello.d" -o "src/hello.o" "../src/hello.C"
+Finished building: ../src/hello.C
+ 
+Building file: ../src/hello2.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/hello2.d" -MT"src/hello2.d" -o "src/hello2.o" "../src/hello2.C"
+../src/hello2.C: In function ‘int gtk2_hello2::main(int, char**)’:
+../src/hello2.C:50:12: warning: ‘gtk2_hello2::GtkWidget* gtk2_hello2::gtk_hbox_new(gtk2_hello2::gboolean, gtk2_hello2::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/hello2.C:50:34: warning: ‘gtk2_hello2::GtkWidget* gtk2_hello2::gtk_hbox_new(gtk2_hello2::gboolean, gtk2_hello2::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/hello2.C
+ 
+Building file: ../src/label.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/label.d" -MT"src/label.d" -o "src/label.o" "../src/label.C"
+../src/label.C: In function ‘int gtk2_label::main(int, char**)’:
+../src/label.C:24:10: warning: ‘gtk2_label::GtkWidget* gtk2_label::gtk_vbox_new(gtk2_label::gboolean, gtk2_label::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/label.C:24:32: warning: ‘gtk2_label::GtkWidget* gtk2_label::gtk_vbox_new(gtk2_label::gboolean, gtk2_label::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/label.C:25:10: warning: ‘gtk2_label::GtkWidget* gtk2_label::gtk_hbox_new(gtk2_label::gboolean, gtk2_label::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/label.C:25:32: warning: ‘gtk2_label::GtkWidget* gtk2_label::gtk_hbox_new(gtk2_label::gboolean, gtk2_label::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkhbox.h:62): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/label.C:55:10: warning: ‘gtk2_label::GtkWidget* gtk2_label::gtk_vbox_new(gtk2_label::gboolean, gtk2_label::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/label.C:55:32: warning: ‘gtk2_label::GtkWidget* gtk2_label::gtk_vbox_new(gtk2_label::gboolean, gtk2_label::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/label.C
+ 
+Building file: ../src/layout.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/layout.d" -MT"src/layout.d" -o "src/layout.o" "../src/layout.C"
+Finished building: ../src/layout.C
+ 
+Building file: ../src/menu.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/menu.d" -MT"src/menu.d" -o "src/menu.o" "../src/menu.C"
+../src/menu.C: In function ‘int gtk2_menu::main(int, char**)’:
+../src/menu.C:76:12: warning: ‘gtk2_menu::GtkWidget* gtk2_menu::gtk_vbox_new(gtk2_menu::gboolean, gtk2_menu::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/menu.C:76:34: warning: ‘gtk2_menu::GtkWidget* gtk2_menu::gtk_vbox_new(gtk2_menu::gboolean, gtk2_menu::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/menu.C
+ 
+Building file: ../src/paned.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/paned.d" -MT"src/paned.d" -o "src/paned.o" "../src/paned.C"
+../src/paned.C: In function ‘int gtk2_paned::main(int, char**)’:
+../src/paned.C:122:14: warning: ‘gtk2_paned::GtkWidget* gtk2_paned::gtk_vpaned_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvpaned.h:60): Use 'gtk_paned_new' instead [-Wdeprecated-declarations]
+../src/paned.C:122:30: warning: ‘gtk2_paned::GtkWidget* gtk2_paned::gtk_vpaned_new()’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvpaned.h:60): Use 'gtk_paned_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/paned.C
+ 
+Building file: ../src/status_bar.C
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"src/status_bar.d" -MT"src/status_bar.d" -o "src/status_bar.o" "../src/status_bar.C"
+../src/status_bar.C: In function ‘int gtk2_status_bar::main(int, char**)’:
+../src/status_bar.C:47:12: warning: ‘gtk2_status_bar::GtkWidget* gtk2_status_bar::gtk_vbox_new(gtk2_status_bar::gboolean, gtk2_status_bar::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+../src/status_bar.C:47:34: warning: ‘gtk2_status_bar::GtkWidget* gtk2_status_bar::gtk_vbox_new(gtk2_status_bar::gboolean, gtk2_status_bar::gint)’ is deprecated (declared at /usr/include/gtk-3.0/gtk/deprecated/gtkvbox.h:60): Use 'gtk_box_new' instead [-Wdeprecated-declarations]
+Finished building: ../src/status_bar.C
+ 
+Building file: ../main.cpp
+Invoking: Cross G++ Compiler
+g++ -I/usr/include/gtk-3.0 -I/usr/include/libpng14 -I/usr/include/pango-1.0 -I/usr/include/gio-unix-2.0 -I/usr/include/atk-1.0 -I/usr/include/cairo -I/usr/include/gdk-pixbuf-2.0 -I/usr/include/freetype2 -I/usr/include/glib-2.0 -I/usr/lib64/glib-2.0/include -I/usr/include/pixman-1 -I/usr/include/libpng12 -O0 -g3 -Wall -c -fmessage-length=0 -MMD -MP -MF"main.d" -MT"main.d" -o "main.o" "../main.cpp"
+Finished building: ../main.cpp
+ 
+Building target: C_GTK3
+Invoking: Cross G++ Linker
+g++ -pthread -o "C_GTK3"  ./src/arrow.o ./src/aspect_frame.o ./src/box.o ./src/button_box.o ./src/button_icon.o ./src/button_radio.o ./src/container.o ./src/event_box.o ./src/fixed.o ./src/hello.o ./src/hello2.o ./src/label.o ./src/layout.o ./src/menu.o ./src/paned.o ./src/status_bar.o  ./main.o   -lgtk-3 -lgdk-3 -latk-1.0 -lgio-2.0 -lpangocairo-1.0 -lgdk_pixbuf-2.0 -lcairo-gobject -lpango-1.0 -lcairo -lgobject-2.0 -lglib-2.0
+Finished building target: C_GTK3
+ 
+
+**** Build Finished ****
+
+
+                                                                

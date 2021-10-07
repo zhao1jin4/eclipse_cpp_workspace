@@ -1,0 +1,4 @@
+daemon_proces中的 openlog
+signal_set 最好也要linux中试
+
+
