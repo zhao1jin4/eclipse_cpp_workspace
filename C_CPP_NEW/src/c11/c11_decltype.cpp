@@ -26,8 +26,8 @@ namespace c11_decltype{
 		decltype(var1+var2) var4;
 		decltype(var3=var1+var2) var5=var1;
 
-		decltype (leftValueRef(1,2)) myLeft=22;//不会调用函数,类型为 const bool&
-		decltype (rightValueRef(1,2)) myRight=22;//类型为 const bool&&
+		decltype (leftValueRef(1,2)) myLeft=22;//不会调用函数,类型为 const int&
+		decltype (rightValueRef(1,2)) myRight=22;//类型为 const int&&
 
 		const int mynum=2;
 		decltype(mynum) mynum2=3;//const int
@@ -43,5 +43,7 @@ namespace c11_decltype{
 	{
 
 		myDelType();
+
+		 return 0;
 	}
 };

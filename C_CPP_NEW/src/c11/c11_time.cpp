@@ -8,7 +8,7 @@ using namespace std;
 
 namespace c11_time{
 
-
+// https://subingwen.cn/cpp/chrono/#4-2-time-point-cast
 	void f()
 	{
 		cout << "print 1000 stars ...." << endl;
@@ -25,12 +25,13 @@ namespace c11_time{
 		{ //--头文件 <ratio>
 			 ratio<1,1000 > millisecond;// 代表的是 1/1000 秒，也就是 1 毫秒
 		}
-		{ //--头文件 <chrono>
+		{ //--头文件 <chrono>  慢性的，长期的
 		   chrono::hours h(1);                          // 一小时
 			chrono::duration<int, ratio<1000>> ks(3);    // 3000 秒
 
 			// chrono::duration<int, ratio<1000>> d3(3.5);  // error
 			chrono::duration<double> dd(6.6);               // 6.6 秒
+			 //看源码有 using seconds	= duration<_GLIBCXX_CHRONO_INT64_T>;
 
 			// 使用小数表示时钟周期的次数
 			chrono::duration<double, std::ratio<1, 30>> hz(3.5);//时钟周期为 1/30 秒，共有 3.5 个时钟周期，所以 hz 表示的时间间隔为 1/30*3.5 秒
@@ -40,8 +41,8 @@ namespace c11_time{
 			std::chrono::microseconds us = 2*ms;     // 6000 微秒
 
 			//count()周期数
-			std::cout <<  "3 ms duration has " << ms.count() << " ticks\n"
-					  <<  "6000 us duration has " << us.count() << " ticks\n"
+			std::cout <<  "3 ms duration has " << ms.count() << " ticks\n" //MinGW不能Debug
+					  <<  "6000 us duration has " << us.count() << " ticks\n"//MinGW不能Debug
 					  <<  "3.5 hz duration has " << hz.count() << " ticks\n";
 
 			chrono::minutes t1(10);
@@ -98,11 +99,11 @@ namespace c11_time{
 
 			// 小数时长：不要求 duration_cast
 			duration<double, ratio<1, 1000>> fp_ms = dt;
-			cout << "f() took " << fp_ms.count() << " ms, "
+			cout << "f() took " << fp_ms.count() << " ms, "//在这 MinGW 不能debug??
 				<< "or " << int_ms.count() << " whole milliseconds\n";
 		}
 
-		// https://subingwen.cn/cpp/chrono/#4-2-time-point-cast
+
 		return 1;
 
 	}

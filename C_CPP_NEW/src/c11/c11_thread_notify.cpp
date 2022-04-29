@@ -8,19 +8,19 @@
 using namespace std;
 
 namespace c11_thread_notify{
-/*
-	class SyncQueue
+	//condition_variable 要和mutex一起用
+	class SyncQueueOld
 	{
 	public:
-	    SyncQueue(int maxSize) : m_maxSize(maxSize) {}
+		SyncQueueOld(int maxSize) : m_maxSize(maxSize) {}
 
 	    void put(const int& x)
 	    {
-	        unique_lock<mutex> locker(m_mutex);//unique_lock 包装一个 mutex
-	        while (m_queue.size() == m_maxSize)//为何不用if,wait会假醒？
+	        unique_lock<mutex> locker(m_mutex);//unique_lock 包装一个 mutex,比lock_guard灵活,效率低一点
+	        while (m_queue.size() == m_maxSize)//用循环 可以以多次满的情况
 	        {
 	            cout << "任务队列已满, 请耐心等待..." << endl;
-	            m_notFull.wait(locker);//还有wait_for和wait_until方法,第二个参数可传一个函数，返回true不阻塞，返回false阻塞(看源码)
+	            m_notFull.wait(locker);//还有wait_for和wait_until方法,第二个参数可传一个函数，返回true不阻塞，返回false阻塞(看源码)，可防止假醒
 	        }
 	        m_queue.push_back(x);
 	        cout << x << " 被生产" << endl;
@@ -67,7 +67,7 @@ namespace c11_thread_notify{
 	    condition_variable m_notFull;
 	    int m_maxSize;
 	};
-*/
+
 
 
 
@@ -127,6 +127,8 @@ namespace c11_thread_notify{
 	    int m_maxSize;
 	};
 
+
+
 	int main(int argc, char* argv[])
 	{
 		 SyncQueue taskQ(50);
@@ -147,5 +149,44 @@ namespace c11_thread_notify{
 		}
 
 		this_thread::sleep_for(chrono::seconds(2));
+
+		return 1;
 	}
+
+	class Single{
+		public:
+			static Single* getInstance(){
+				/*
+				if(m_instance == NULL){
+					unique_lock<mutex> mylock(mymutex);
+					if(m_instance == NULL){
+						m_instance=new Single();
+						static InnerRelease in;//特别的放在条件里的static 成员
+					}
+				}
+				*/
+				call_once(g_flag, newInstance);
+				return m_instance;
+			}
+			class InnerRelease{
+			public:
+				~InnerRelease(){
+					if(Single::m_instance){
+						delete Single::m_instance;
+						Single::m_instance=NULL;
+					}
+				}
+			};
+		private:
+			static Single* m_instance;
+
+			//static mutex mymutex;
+
+			static once_flag g_flag;
+			static Single* newInstance(){
+				static InnerRelease in;
+				return new Single();
+			}
+		};
+
 };

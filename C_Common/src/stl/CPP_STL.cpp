@@ -107,7 +107,15 @@ namespace stl_cpp
 		outfile.write(data,len);//可以是二进制数据,sizeof(struct1)
 
 		outfile.close();
-
+		//------------按行读文本文件
+		ifstream file1{"d:/temp/f1.dat"};
+		vector<string> lines{};
+		string line{};
+		while(getline(file1,line)){
+			cout<<line<<endl;
+			lines.push_back(line);
+		}
+		file1.close();
 		//------------读文本 文件
 
 		ifstream infile;
@@ -137,6 +145,9 @@ namespace stl_cpp
 			cout<<"o:="<<x<<endl;
 		}
 		infile.close();
+
+
+
 
 		return 1;
 	}
@@ -309,6 +320,7 @@ namespace stl_cpp
 
 	  mymap.insert ( pair<char,int>('a',100) );//不带位置的,失败,而不是覆盖
 	  mymap.insert ( pair<char,int>('z',200) );
+
 
 	  map_iter = mymap.begin();//end()也是一样的,因是按key排序的
 	  mymap.insert (map_iter, pair<char,int>('x',300));//带位置的
@@ -547,8 +559,8 @@ namespace stl_cpp
 	}
 	int main(int argc,char* argv[] )
 	{
-		return consoleIO();
-		//return readWriteTextFile();
+		//return consoleIO();
+		return readWriteTextFile();
 		//return readWriteBinaryFile();
 		//return STL_Container();
 		//return STL_string();

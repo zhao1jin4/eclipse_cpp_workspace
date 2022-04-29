@@ -41,7 +41,7 @@ Test getObj1()
 }
 int main(int argc, char *argv[]) //我测试的只 析构了一次
 {
-     Test t = getObj(); //测试并不能调到移动构造函数？？？ ， GCC-8,gcc-9
+     Test t = getObj(); //测试并不能调到移动构造函数？？？ ,使用c++20就调用不到可能版本更新了
      Test && t1 = getObj(); //调不到移动构造函数？？？
      printf(" m_num addr:%p \n" , t1.m_num);
      Test && t2 = getObj1();

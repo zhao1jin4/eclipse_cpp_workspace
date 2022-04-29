@@ -1,0 +1,31 @@
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "D:/msys64/mingw64/include/gtk-4.0",
+                "D:/msys64/mingw64/include/pango-1.0",
+                "D:/msys64/mingw64/include",
+                "D:/msys64/mingw64/include/glib-2.0",
+                "D:/msys64/mingw64/lib/glib-2.0/include",
+                "D:/msys64/mingw64/include/harfbuzz",
+                "D:/msys64/mingw64/include/freetype2",
+                "D:/msys64/mingw64/include/libpng16",
+                "D:/msys64/mingw64/include/fribidi",
+                "D:/msys64/mingw64/include/cairo",
+                "D:/msys64/mingw64/include/lzo",
+                "D:/msys64/mingw64/include/pixman-1",
+                "D:/msys64/mingw64/include/gdk-pixbuf-2.0",
+                "D:/msys64/mingw64/include/graphene-1.0",
+                "D:/msys64/mingw64/lib/graphene-1.0/include"
+            ],
+            "defines": [],
+        
+            "cStandard": "gnu17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64",
+            
+        }
+    ],
+    "version": 4
+}

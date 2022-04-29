@@ -1,8 +1,13 @@
 #include "main.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 int main(int argc, char *argv[]) {
+	setbuf(stdout, NULL);//CDT 工具必须调用这个才立即输出到控制台,全局的
+	//fflush(stdout);//CDT 工具必须调用这个才立即输出到控制台，局部的
 
 	c_basic::main(argc, argv);
+	/*
 	cpp_basic::main(argc, argv);
 	cpp_const::main(argc, argv);
 	cpp_equal::main(argc, argv);
@@ -20,6 +25,8 @@ int main(int argc, char *argv[]) {
 	no_recursive::main(argc, argv);
 	quiz_reverse::main(argc, argv);
 	quiz_function_statck::main(argc, argv);
+	*/
+
 
 	return 1;
 

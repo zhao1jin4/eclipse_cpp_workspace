@@ -26,7 +26,7 @@ namespace c11_auto{
 		auto res=T::get(); //auto动态类型
 		cout<<res<<endl;
 	}
-	template<class T,class U> auto  addAuto(T a,U b) -> decltype(a+b) //返回类型是auto,通过decltype计算出，后加->
+	template<class T,class U> auto  addAuto(T a,U b) -> decltype(a+b) //返回类型是auto,通过decltype计算出，后加-> (返回类型不能是decltype因还不知道模板类型)
 	{
 		 return a+b;
 	}
@@ -39,6 +39,15 @@ namespace c11_auto{
 		auto& ref=d;//ref是d的别名
 		ref=33;
 		auto* ptr=&d;
+		auto  ptr1=&d;
+
+		const auto pi =3.14;
+		auto p2=pi; //不能带const类型，是double类型
+
+		volatile int tickets=10;
+		auto tickets2 =tickets;//不能带volatile类型，是int类型
+
+
 		//函数参数不能是auto
 		//auto myarray[]={1,3,4};//auto不可初始化数组
 		 int myarray[]={1,3,4};
@@ -74,5 +83,7 @@ namespace c11_auto{
 	int main(int argc, char* argv[])
 	{
 		 myAuto();
+
+		 return 0;
 	}
 };

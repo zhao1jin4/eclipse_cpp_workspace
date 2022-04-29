@@ -8,10 +8,11 @@ using namespace std;
 namespace c11_using{
 		// 模板别名
 		template <class T> using Ptr = T*;
-		Ptr<int> ip;  // decltype(ip) is int*
+
 
 		//Map的值是变类型的，老的方式
 		template <typename T>
+		//typedef map<int,T> mapType;//不能直接这样,必须放在struct里
 		struct  MyMap{
 			typedef map<int,T> mapType;
 		};
@@ -23,6 +24,7 @@ namespace c11_using{
 		using MMap=map<int,T>;
 	int main(int argc, char* argv[])
 	{
+		Ptr<int> ip;  // decltype(ip) is int*
 
 		using typeint=int; //using 别名，像typedef
 		typeint aliseInt=3;
@@ -30,6 +32,6 @@ namespace c11_using{
 		typedef int (*funcptr)(int,int);
 		using  funptr1=int(*)(int,int);//using可读性好
 
-
+		return 0;
 	}
 };

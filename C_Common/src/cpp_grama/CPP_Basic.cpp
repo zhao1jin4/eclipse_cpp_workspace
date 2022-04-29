@@ -199,7 +199,7 @@ namespace cpp_basic
 	  cerr << "unexpected called\n";
 	  throw 0;
 	}
-	void myfunction () throw (int) {
+	void myfunction () throw () {//c++17 不能在throw()里面加int等
 	  throw  0.32;
 	}
 

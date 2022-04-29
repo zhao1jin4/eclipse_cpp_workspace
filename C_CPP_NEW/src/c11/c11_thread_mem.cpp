@@ -34,17 +34,34 @@ namespace c11_thread_mem{
 
 	void thread_method(int age, string name, Test* obj)//参数不能使用引用 & ,即不能int & age,但可以指针*
 	{
-		printf(" thread id %d age address is %p\n",this_thread::get_id(),age);
-		printf(" thread id %d name address is %p\n",this_thread::get_id(),name);
-		printf(" thread id %d name = %s\n",this_thread::get_id(),*name.c_str());
+		printf(" thread id %d age address is %d\n",this_thread::get_id(),age);
+		printf(" thread id %d name = %s\n",this_thread::get_id(),name.c_str());//name为string类型，printf用%s参数传name.c_str()
 		printf(" thread id %d obj is %d\n",this_thread::get_id(),*(obj->m_num));
-		 //如果一个线程结束，如指向被回收，主线程再用就有问题(有类的析构函数，测试下来并没有被调用回收，没有析构)，
-		int x=0;//CDT工具，C++11多线程debug不能显示源码??
+		 //如果一个线程结束，如指向被回收，主线程再用就有问题(有类的析构函数，测试下来（函数参数为指针）并没有被调用回收，没有析构)，
+		int x=0;
 		x++;
 	}
+
+
+
+	class MyInvoke{
+		public:
+			MyInvoke (){
+				cout<<"MyInvoke contructor " <<endl;
+			}
+
+			 MyInvoke (MyInvoke & my){
+				cout<<"MyInvoke copy contructor " <<endl;
+			}
+
+			void operator()(){
+				cout<<"MyInvoke operator () " <<endl;
+			}
+		};
+
 	int main(int argc, char* argv[])
 	{
-		 char * name="lisi";
+		 const char * name="lisi";//vc2019前加不const就报错
 //		 std::string* name = new std::string("Hello");
 		 printf("main thread name address is %p\n",name);
 
@@ -53,15 +70,19 @@ namespace c11_thread_mem{
 		 int &age1=age;
 
 		 thread t1(thread_method, age1, name,obj);//参数传递是以复制方式，指针是地址
-		 thread t2(thread_method, age1, name,obj);
-
 		 t1.detach();
-		 t2.detach();
-
+//		 t1.join();
 		 this_thread::sleep_for(chrono::seconds(1));
 //		 printf("main thread name is %s\n",name->c_str());
-		 printf("main thread name is %s\n",name );
+		 printf("main thread name is %s\n",name );//join()执行name没有被回收
 		 printf("main thread obj is %d\n",*(obj->m_num));
 		 this_thread::sleep_for(chrono::seconds(1));
+
+
+		MyInvoke my;
+		thread  thread1(my);//调用了MyInvoke & 参数形式的复制构造函数
+		thread1.join();
+
+		 return 0;
 	}
 };

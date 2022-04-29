@@ -1,0 +1,14 @@
+cmake_minimum_required( VERSION 3.0 )
+
+project( IKE )
+
+set(SRC mylib.cpp) #设置变量
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++20")
+
+set(CMAKE_BUILD_TYPE Debug) 
+MESSAGE(STATUS "生成--开头的INFO级信息显示变量SRC=${SRC}")
+include_directories(${C_MAKE_SOURCE_DIR}/include) 
+add_executable(main src/main.cpp src/mylib.cpp) #生成可执行文件
+install(FILES src/README.rd DESTINATION /tmp/)
+#以上测试成功

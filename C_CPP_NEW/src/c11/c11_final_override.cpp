@@ -41,7 +41,7 @@ public:
 class Human  final //不可被继承
 			:public Animal{
 public:
-	 void walk() override  final //不可再被子类重写,必须是重写了父类的virtual函数,override可有可无，易读
+	 void walk() override  final //不可再被子类重写,必须是重写了父类的virtual函数,override可有可无(和final没有先后顺序)，易读
 	 {
 		cout<<"Human walk"<<endl;
 	}
@@ -52,6 +52,7 @@ int main(int argc, char* argv[])
 {
 
   f<int>();
+  return 0;
 }
 
 }

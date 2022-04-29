@@ -16,8 +16,8 @@ namespace c11_init{
 		int array[]{1,2,3};
 		int array1[]={1,2,3};
 
-	//	int* b1 = new int[] { 1, 2, 0 };//目前不行
-	//	double d = double{ 1.0, 2.0  };//目前不行
+		int* b1 = new int[] { 1, 2, 0 };
+	 	//double d = double{ 1.0, 2.0  };//目前不行
 	}
 	class X
 	{
@@ -65,7 +65,7 @@ namespace c11_init{
 
 		{ //以前的作法
 			int a[] = {0, 1, 2, 3};
-			std::vector<int> vec(a, a+sizeof(a));
+			std::vector<int> vec(a, a+sizeof(a));//首尾指针
 
 			//或
 			std::vector<int> v;
@@ -84,10 +84,15 @@ namespace c11_init{
 		struct Point{
 			int x;
 			long y;
-			Point(int x){
+		}p2{200,200};
+
+		struct Point2{
+			int x;
+			long y;
+			Point2(int x){
 			}
-		} //p{200,200}
-			p2{200};//有构造函数就只能调用构造函数了
+		}p22{200};//有构造函数就只能调用构造函数了
+
 
 
 		struct T1
@@ -97,6 +102,8 @@ namespace c11_init{
 		private:
 		    int z; //private的不能用初始化列表，
 		};
+		//T1 t11 {2,0.2};//不能初始化T1  ?,因为有private ?
+
 		struct T2
 		{
 		    T1 t1;
@@ -108,5 +115,8 @@ namespace c11_init{
 		for(int i:t2.array){
 			cout<<i<<endl;
 		}
+
+
+		return 1;
 	}
 };

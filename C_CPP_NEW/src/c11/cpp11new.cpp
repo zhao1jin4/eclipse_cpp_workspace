@@ -1,12 +1,12 @@
 
-
+#include <string>
 #include <iostream>
 #include <vector>
 #include <list>
 #include <map>
 #include <algorithm>
 #include <ratio>
-
+#include <array>
 using namespace std;
 
 namespace cpp11new{
@@ -43,7 +43,13 @@ void f(char *){
 	cout<<"f char"<<endl;
 }//#2
 
-
+class Const{
+	void area(const int pi){
+			const int size=10;
+			int array0[size];
+			int array[pi];//vc是不能编译的
+		}
+};
 constexpr int sumByNum(int num){
 	int res=0;
 	for(int i=0;i<num;i++)
@@ -92,7 +98,7 @@ int main(int argc, char *argv[])
 			";
 	cout<<longstr.c_str()<<endl;//string用c_str(),显示的前面空格还是有的,输出并没有换行 每行加\来分隔
 	//R
-	string path=R"(c:\tmp\my.txt)"; //使用R
+	string path=R"(c:\tmp\my.txt)"; //使用R"(  )"
 	cout<<path<<endl; //有没有c_str() 输出\t都是制表符
 
 	string bodystr=R"(<body> 
@@ -103,9 +109,11 @@ int main(int argc, char *argv[])
 	path=R"win(c:\tmp\my.txt)win"; //()前后的必须使用相同字符，只做备注使用
 	cout<<path<<endl;
 
+	int * myNull=nullptr;
+
 
 //	const double const_pi=3.14;
-//	constexpr double two_pi=2*const_pi;//报错
+//	constexpr double two_pi=2*const_pi;//报错,编译阶段确定的值，const_pi不能确定，如函数参数
 //	int n=2;
 //	constexpr double n_pi=n*const_pi;//报错
 	constexpr double pi2=3.14*2;
@@ -113,12 +121,12 @@ int main(int argc, char *argv[])
 	//pi3=33;//不可修改
 	constexpr int sum=sumByNum(5);//函数也要声明constexpr
 
-
+	volatile int safeVar ;//同java
 
 	templateDefault("123");//如没有指定模板类型，可根据参数推算出为string
 
 	{	//--string
-	    string pi = "pi is " + to_string(3.1415926);
+	    string pi = "pi is " + to_string(3.1415926);//VC2019 要 #include <string>
 		string love = "love is " + to_string(5.20 + 13.14);
 		cout << pi << endl;
 		cout << love << endl;
@@ -146,12 +154,17 @@ struct A1
 };
 
 
+/*
+#include<stdio.h>//C老式的
+#include<cstdio>//C新式的
 
-//#include<stdio.h>//C老式的
-//#include<cstdio>//C新式的
+<array> 头文件
+
+noexcept 话在函数后面表示没有异常
+
+explicit 明确的,显示的 ，implicit 不言明,隐式的
+		explicit放在构造函数前，表示 不能发生相应的隐式类型转换
 
 
-
-
-
+*/
 }//namespace

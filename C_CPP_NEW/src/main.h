@@ -50,7 +50,11 @@ namespace c11_move_forward
 	int main(int argc, char* argv[]);
 };
 
-namespace c11_intellij_ptr
+namespace c11_smart_ptr
+{
+	int main(int argc, char* argv[]);
+};
+namespace c11_smart_ptr_weaklock
 {
 	int main(int argc, char* argv[]);
 };
@@ -88,22 +92,49 @@ namespace cpp11new
 	int main(int argc, char* argv[]);
 };
 
-
-
-namespace thread_fail
-{
-	int main(int argc, char* argv[]);
-};
 namespace move_contruct
 {
 	int main(int argc, char* argv[]);
 };
-
-
 namespace c14_new
 {
 	int main(int argc, char* argv[]);
 };
+namespace c17_new
+{
+	int main(int argc, char* argv[]);
+};
+namespace c20_new
+{
+	int main(int argc, char* argv[]);
+};
+namespace c20_requires_concept
+{
+	int main(int argc, char* argv[]);
+};
+namespace c20_container_erase
+{
+	int main(int argc, char* argv[]);
+};
+namespace c20_trivially
+{
+	int main(int argc, char* argv[]);
+};
+namespace c20_coroutine
+{
+	int main(int argc, char* argv[]);
+};
+namespace c20_module
+{
+	int main(int argc, char* argv[]);
+};
 
-
+namespace c20_lib
+{
+	int main(int argc, char* argv[]);
+};
+namespace c20_wrong
+{
+	int main(int argc, char* argv[]);
+};
 

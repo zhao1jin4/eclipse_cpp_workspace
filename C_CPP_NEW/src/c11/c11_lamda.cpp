@@ -72,21 +72,22 @@ void myLamada(){
 			 return 1.3f;
 		 };
 
-		function<MyStruct(int)> f2 =[] (int i) mutable -> MyStruct{ // 如省 ()-> 报错
+		function<MyStruct(int)> f2 =[] (int i) mutable -> MyStruct{ //function<MyStruct(int)> 表示返回MyStruct参数为int，可省略为 function
 			return {i,3};//参数列表时，返回类型不能省
 		};
 
 		// 绑定可调用函数
 		function<int(int)> ff3 = bind([](int a) {return a; }, placeholders::_1);
+		int res=ff3(20);//20传给placeholders::_1 再传给 a,再调用
 
 		//对于没有捕获任何变量的 lambda 表达式，还可以转换成一个普通的函数指针：
 		using func_ptr = int(*)(int);
-		func_ptr fx = [](int a)
+		func_ptr fx = [](int a) //省略返回
 		{
 		    return a;
 		};
 		// 函数调用
-		fx(1314);
+		res=fx(1314);
 
 	}
 	cout <<  endl;
@@ -95,5 +96,7 @@ void myLamada(){
 	int main(int argc, char* argv[])
 	{
 		 myLamada();
+
+		 return 1;
 	}
 };

@@ -1,3 +1,4 @@
+#include <string.h>
 namespace c11_contructor{
 
 	class Parent {
@@ -10,6 +11,7 @@ namespace c11_contructor{
 		Parent(int i){
 			this->num=i;
 		}
+
 	};
 	class Child:public Parent{
 	public :
@@ -30,6 +32,7 @@ namespace c11_contructor{
 
 	int main(int argc, char* argv[])
 	{
-
+		Child c(20);
+		 return 0;
 	}
 };

@@ -15,7 +15,7 @@ namespace stl_signal
 
 		printf ("Terminating program...\n");
 		remove (tmpfilename);
-		exit(1);
+
 	}
 	void  signalTest()
 	{
