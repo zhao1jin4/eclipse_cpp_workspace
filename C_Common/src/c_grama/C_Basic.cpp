@@ -35,13 +35,16 @@ int min(int a,int b)
 {
 	return a<b?a:b;
 }
-int (*returnFuncInPointer(int a))(int,int)//返回指向函数的指针
+void* returnFunc(){
+  return (void*)min;
+}
+int (*returnFuncInPointer(int a))(int,int)//返回指向函数的指针,不易读
 {
 	 int (*p) (int ,int);//定义指向函数的针;
 	 p=min;
 	 return p;
 }
-//或者用
+//或者用,linux 信号处理函数signal就是这样的形式
 typedef int (*FuncInPointer) (int ,int);
 FuncInPointer  returnFuncInPointer2(int a)
 {
@@ -92,7 +95,33 @@ void pointerConstTest()
 	int chars[5]={0,1,2};
 	int (*pointer)[5];//是指针,指向int[5]的数组
 	pointer = &chars;
-	printf("%d",(*pointer)[2]);//2
+	printf("%d\n",(*pointer)[2]);//2
+	//--
+	  typedef int (*FUNC)(int, int);
+	  FUNC func1 = min;
+	  printf("%d\n",  func1(11,22));
+	  printf("%d\n",  (*func1)(11,22));
+
+	  FUNC func2 = &min;
+	  printf("%d\n",  (*func2)(10,20));
+	  printf("%d\n",  func2(10,20));
+
+	  int(*minPtr2)(int,int)=&min;
+	  int(**minPtr3)(int,int)=&minPtr2;//"指向函数指针" 的 指针
+	  printf("%d\n",  (**minPtr3)(22,33));
+
+	  FUNC func3 = NULL;
+	  void* funcVoid=(void*)min;
+	 // *(void **) (&func3) =funcVoid;//=前面是void*类型
+	  *((void **) (&func3)) =funcVoid;//就是func3取地址，再强制为void ** 类型，再取值，再赋值(即先强转再赋值)
+	  printf("%d\n",  (*func3)(10,20));
+	  printf("%d\n",  func3(10,20));
+	  //--
+
+	void* func=returnFunc();
+    int (*pMin)(int,int);
+    pMin=(int (*)(int,int))func;//void* 强制转换为指向函数的指针
+    printf("%d\n", pMin(22,33));
 
 	//--
 	FuncInPointer arrayCom[5];//是数组,里存放指针向函数的指针
@@ -134,6 +163,11 @@ void basic()
 	//fflush(stdout);
 
 	scanf("%d",&a[0][0]);//必须有 &
+
+	char* str="20";
+	int num=0;
+	sscanf(str,"%d",&num);//可做类型转换
+
 	printf("\n%x\n",194+9);//%x以16进制输出
 
 	printf("----------\n");
@@ -255,7 +289,7 @@ int main(int argc,char **argv)
 
 	basic();
 	complex();
-	//pointerConstTest();
+	pointerConstTest();
 
 	enumFunc(pear);//enum 不能 做|操作
 

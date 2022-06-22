@@ -12,7 +12,6 @@ namespace socket_tcp_client
 {
 
 //socket   https://www6.software.ibm.com/developerworks/cn/education/linux/l-sock/tutorial/l-sock-3-2.html
-//Fedora 9 上执行 OK)(TCP) ,solaris 上不可以编译成功
 //client(TCP)
 
 #define BUFFSIZE 32
@@ -25,7 +24,7 @@ int main(int argc, char *argv[])
 {
 
 	int sock;
-	struct sockaddr_in echoserver;
+	struct sockaddr_in echoserver;//in=Internet  要<netinet/in.h>
 	char buffer[BUFFSIZE];
 	unsigned int echolen;
 	int received = 0;
@@ -45,8 +44,8 @@ int main(int argc, char *argv[])
 
 	/* Construct the server sockaddr_in structure */
 	memset(&echoserver, 0, sizeof(echoserver)); /* Clear struct */
-	echoserver.sin_family = AF_INET; /* Internet/IP */
-	echoserver.sin_addr.s_addr = inet_addr(argv[1]); /* IP address */
+	echoserver.sin_family = AF_INET;//sin=sock Internet,AF=Address families
+	echoserver.sin_addr.s_addr = inet_addr(argv[1]);//s_=sock
 	echoserver.sin_port = htons(atoi(argv[3])); /* server port */
 
 	fprintf(stdout, "Establish connection... ");

@@ -16,6 +16,7 @@
 namespace stl_c
 {
 
+
 int C_readWriteFileTest()
 {
 
@@ -200,16 +201,45 @@ void cLibrary()
 	 printf("溢出%d\n",max);
 
 
-//-------------------------------locale.h  & time.h
+//------------------------------- time.h
 	time_t rawtime;
 	struct tm * timeinfo;
 	time ( &rawtime );//把当前的时间截写入
+
 	timeinfo = localtime ( &rawtime );//转为当地时间,可以读年月日等
 
 	char buffer [80];
-	strftime (buffer,80,"%Y-%m-%d %H:%M:%S , %Z ",timeinfo);//把日期转字串,%Y-%m-%d %H:%M:%S  ,%X表示%H:%M:%S ,%Z 为CST或China Standard Time
+	//f=format
+	strftime (buffer,80,"%Y-%m-%d %H:%M:%S %Z",timeinfo);//把日期转字串,%Y-%m-%d %H:%M:%S  ,%X表示%H:%M:%S ,%Z 为CST或China Standard Time
 	printf ("Date is: %s\n",buffer);
 
+	struct tm  timeinfo2;
+	strptime("2022-05-09 11:21:13 CST ","%Y-%m-%d %H:%M:%S %Z",&timeinfo2 );//p=parse
+	printf ("parse date is: %s\n",asctime(&timeinfo2));
+
+	//asctime ,ctime 只是使用特定的格式 Www Mmm dd hh:mm:ss yyyy
+	printf ("ctime res is: %s\n",ctime(&rawtime));//ctime=asctime(localtime( ))
+
+	time_t timestamp;
+	time ( &timestamp );
+	struct tm * tm_now = gmtime ( &timestamp );//转成GMT时间
+	printf ("GMT 北京+8 时间:  %02d:%02d\n", (tm_now->tm_hour + 8)%24, tm_now->tm_min);//%02d可显示00,而不是一个0
+
+
+	int t=clock();
+	printf ("从程序启动到现在花费了%d clicks ,%f 秒\n",t,((float)t)/CLOCKS_PER_SEC);
+
+	//	time_t start,end;
+	//	char szInput [256];
+	//	printf ("Please, enter your name: ");
+	//	time (&start);
+	//	gets (szInput);
+	//	time (&end);
+	//	double dif = difftime (end,start);//计算两个时间点有多少秒
+	//	printf ("Hi %s.\n", szInput);
+	//	printf ("It took you %.2lf seconds to type your name.\n", dif );
+
+	//-------------------------------locale.h
 	printf ("Locale is: %s\n", setlocale(LC_ALL,"") );//"", 环境默认的locale,"C"是最小的locale
 
 	struct lconv * lc;
@@ -251,7 +281,7 @@ void cLibrary()
 
 //-------------------------------stdint.h   C++11
 //-------------------------------stdio.h
-	  FILE * f=tmpfile(); //以wb+ 模式建立一个临时文件,可以保证文件名不是已有的,并打开,在close时删除
+	  FILE * f=tmpfile(); //以wb+ 模式建立一个临时文件,可以保证文件名不是已有的,并打开,在close时删除,多线程比tmpnam更安全
 	  //intf ("文件名是: %s\n",f->_tmpfname);//Cyginw编译器没有这个成员
 	  char * content ="testABC中国";
 	  int len=strlen(content);
@@ -259,10 +289,18 @@ void cLibrary()
 	  fclose(f);
 
 	  char bufferFile [L_tmpnam];//长度最小值 宏L_tmpnam
-	  tmpnam (bufferFile);//返回一个文件名
+	  tmpnam (bufferFile);//返回一个文件名,`tmpnam' is dangerous, better use `mkstemp'
 	  printf ("带参的临时文件名:%s\n",bufferFile);
 	  char * pointer = tmpnam (NULL);//如果传NULL使用返回值,下次调用会覆盖这部分区域
 	  printf ("NULL参的临时文件名: %s\n",pointer);
+
+		int tmpfd;
+		char temp[] = "template-XXXXXX";//返回底层的文件描述符,要求６个Ｘ结尾的字符串
+		tmpfd = mkstemp(temp);
+		printf("template = %s\n", temp);//会把６个Ｘ替换的
+		FILE *tmpFile=fdopen(tmpfd,"r");
+		fclose(tmpFile);
+		//close(fd);
 
 
 	  char * from="d:/temp/abc.tmp";
@@ -356,6 +394,9 @@ void cLibrary()
 
 		//calloc和malloc,参数不同
 		printf ("操作系统环境变量path: %s\n",getenv ("PATH"));//操作系统环境变量
+		putenv("LOG_ROOT=/tmp/log");
+		printf ("我的进程内部变量LOG_ROOT: %s\n",getenv ("LOG_ROOT"));
+
 		i=system ("dir");//执行操作系统命令,返回值0表示执行成功
 		printf ("The value returned was: %d.\n",i);
 
@@ -365,6 +406,7 @@ void cLibrary()
 
 		long res=labs(-23423l);//long abs
 		printf ("labs:%d\n",res);
+
 
 //-------------------------------string.h
 		char test[] = "memmove can be very useful......";
@@ -448,31 +490,6 @@ void cLibrary()
 		pch_found = strstr (str_tosearch,"sample");//substring 子串的地址
 		strncpy (pch_found,"simple",6);//修改字串
 		puts (str_tosearch);
-
-
-		//-------------------------------time.h
-		//strftime
-		int t=clock();
-		printf ("从程序启动到现在花费了%d clicks ,%f 秒\n",t,((float)t)/CLOCKS_PER_SEC);
-
-
-		//	time_t start,end;
-		//	char szInput [256];
-		//	printf ("Please, enter your name: ");
-		//	time (&start);
-		//	gets (szInput);
-		//	time (&end);
-		//	double dif = difftime (end,start);//计算两个时间点有多少秒
-		//	printf ("Hi %s.\n", szInput);
-		//	printf ("It took you %.2lf seconds to type your name.\n", dif );
-
-
-		//asctime ,ctime 只是使用特定的格式 Www Mmm dd hh:mm:ss yyyy
-
-		time_t timestamp;
-		time ( &timestamp );
-		struct tm * tm_now = gmtime ( &timestamp );//转成GMT时间
-		printf ("GMT 北京+8 时间:  %02d:%02d\n", (tm_now->tm_hour + 8)%24, tm_now->tm_min);//%02d可显示00,而不是一个0
 
 
 	}

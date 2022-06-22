@@ -35,7 +35,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	/* Create the UDP socket */
+	// SOCK_DGRAM 和 IPPROTO_UDP 配合用于创建 UDP socket
 	if ((sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	{
 		Die("Failed to create socket");
@@ -47,14 +47,16 @@ int main(int argc, char *argv[])
 	echoserver.sin_port = htons(atoi(argv[3])); /* server port */
 	/* Send the word to the server */
 	echolen = strlen(argv[2]);
-	if (sendto(sock, argv[2], echolen, 0, (struct sockaddr *) &echoserver,
-			sizeof(echoserver)) != echolen)
+
+	//如果服务端没有启动,也能发出去,当前进程后面代码可以再收
+	if (sendto(sock, argv[2], echolen, 0, //flag
+			(struct sockaddr *) &echoserver,sizeof(echoserver)) != echolen)
 	{
 		Die("Mismatch in number of sent bytes");
 	}
-
+	fprintf(stdout, "Client Send:%s \n",argv[2]);
 	/* Receive the word back from the server */
-	fprintf(stdout, "Received: ");
+	fprintf(stdout, "Client Received: ");
 	clientlen = sizeof(echoclient);
 	if ((received = recvfrom(sock, buffer, BUFFSIZE, 0,
 			(struct sockaddr *) &echoclient, (socklen_t *)&clientlen)) != echolen)

@@ -1,0 +1,16 @@
+make disk 源码打成tar.gz包
+
+dnf install rpm-build 才有rpmbuild命令
+
+man手册
+groff -Tascii tarball/myapp.1 
+
+rpmbuild -ba myapp.spec 建立源码包和二进制包
+
+安装生成的软件包会有　　/usr/lib/.build-id/68/bbfee1e1c2749cb193644583bb0473cdaecae5　　？？
+
+rpmbuild  --rebuild myapp-1.0-1.src.rpm
+
+
+
+

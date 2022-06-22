@@ -28,7 +28,7 @@ namespace stl_signal
 		}
 		if (prev_fn==SIG_IGN)
 			signal (SIGTERM,SIG_IGN);
-		tmpnam (tmpfilename);
+		tmpnam (tmpfilename);// `tmpnam' is dangerous, better use `mkstemp'
 		raise(SIGINT);//发出信号，MinGW ,VC测试 OK
 	}
 

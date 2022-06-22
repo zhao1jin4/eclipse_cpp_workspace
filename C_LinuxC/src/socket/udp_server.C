@@ -11,9 +11,7 @@
 namespace socket_udp_server
 {
 
-//-------UDP server ----//Fedora 9 上OK
-
-
+//-------UDP server ----
 #define BUFFSIZE 255
 void Die(char *mess)
 {
@@ -36,7 +34,7 @@ int main(int argc, char *argv[])
 		exit(1);
 	}
 
-	/* Create the UDP socket */
+	// UDP 使用 SOCK_DGRAM, IPPROTO_UDP
 	if ((sock = socket(PF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0)
 	{
 		Die("Failed to create socket");
@@ -59,19 +57,21 @@ int main(int argc, char *argv[])
 	{
 		/* Receive a message from the client */
 		clientlen = sizeof(echoclient);
-		if ((received = recvfrom(sock, buffer, BUFFSIZE, 0,
+		printf("server waiting...\n");
+		//recvfrom调用会阻塞
+		if ((received = recvfrom(sock, buffer, BUFFSIZE, 0,//flag
 				(struct sockaddr *) &echoclient, (socklen_t*)&clientlen)) < 0)
 		{
 			Die("Failed to receive message");
 		}
-		fprintf(stderr, "Client connected: %s\n",
-				inet_ntoa(echoclient.sin_addr));
+		fprintf(stdout, "Client connected: %s\n", inet_ntoa(echoclient.sin_addr));
 		/* Send the message back to client */
 		if (sendto(sock, buffer, received, 0, (struct sockaddr *) &echoclient,
 				sizeof(echoclient)) != received)
 		{
 			Die("Mismatch in number of echo'd bytes");
 		}
+		//usleep(500);
 	}
 }
 }
